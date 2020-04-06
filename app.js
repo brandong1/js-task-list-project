@@ -8,9 +8,14 @@ const taskInput = document.querySelector('#task');
 // Load all Event listeners
 loadEventListeners();
 
+// Load all event listeners
 function loadEventListeners(){
   //Add task event
   form.addEventListener('submit', addTask);
+  // Remove task event
+  taskList.addEventListener('click', removeTask);
+  // Clear task event
+  clearBtn.addEventListener('click', clearTasks);
 }
 
 // Add task
@@ -42,4 +47,25 @@ function addTask(e){
 
 
   e.preventDefault();
+}
+
+// Remove task
+function removeTask(e){
+  if(e.target.parentElement.classList.contains('delete-item')){
+    if(confirm('Are you sure?')){
+      e.target.parentElement.parentElement.remove();
+    }
+  }
+}
+
+//Clear Tasks
+function clearTasks(){
+  // taskList.innerHTML = '';
+
+  /* While loop is faster according to:
+    https://coderwall.com/p/nygghw/don-t-use-innerhtml-to-empty-dom-elements */
+
+  while(taskList.firstChild){
+    taskList.removeChild(taskList.firstChild);
+  }
 }
