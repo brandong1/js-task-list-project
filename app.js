@@ -18,6 +18,19 @@ function loadEventListeners() {
   taskList.addEventListener('click', removeTask);
   // Clear task event
   clearBtn.addEventListener('click', clearTasks);
+  // Filter tasks event
+  filter.addEventListener('keyup', filterTasks);
+}
+
+// Get Tasks from LS
+function getTasks() {
+  let tasks;
+  if(localStorage.getItem('tasks') === null){
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem('tasks'));
+  }
+
 }
 
 // Add task
