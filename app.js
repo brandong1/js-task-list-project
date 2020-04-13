@@ -52,21 +52,20 @@ function getTasks() {
   });
 }
 
-// Add task
-function addTask(e){
-  if(taskInput.value === ''){
+function addTask(e) {
+  if(taskInput.value === '') {
     alert('Add a task');
   }
 
   // Create li element
   const li = document.createElement('li');
-  //Add class
+  // Add class
   li.className = 'collection-item';
-  //Create text node and append to li
+  // Create text node and append to li
   li.appendChild(document.createTextNode(taskInput.value));
   // Create new link element
   const link = document.createElement('a');
-  //Add class
+  // Add class
   link.className = 'delete-item secondary-content';
   // Add icon html
   link.innerHTML = '<i class="fa fa-remove"></i>';
