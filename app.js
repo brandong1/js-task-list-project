@@ -1,11 +1,11 @@
-// Define UI Variables
+// Define UI Vars
 const form = document.querySelector('#task-form');
 const taskList = document.querySelector('.collection');
 const clearBtn = document.querySelector('.clear-tasks');
 const filter = document.querySelector('#filter');
 const taskInput = document.querySelector('#task');
 
-// Load all Event listeners
+// Load all event listeners
 loadEventListeners();
 
 // Load all event listeners
@@ -52,6 +52,7 @@ function getTasks() {
   });
 }
 
+// Add Task
 function addTask(e) {
   if(taskInput.value === '') {
     alert('Add a task');
@@ -129,12 +130,35 @@ function removeTaskFromLocalStorage(taskItem) {
 }
 
 // Clear Tasks
+function clearTasks() {
   // taskList.innerHTML = '';
 
-  /* While loop is faster according to:
-    https://coderwall.com/p/nygghw/don-t-use-innerhtml-to-empty-dom-elements */
-
-  while(taskList.firstChild){
+  // Faster
+  while(taskList.firstChild) {
     taskList.removeChild(taskList.firstChild);
   }
+
+  // https://jsperf.com/innerhtml-vs-removechild
+
+  // Clear from LS
+  clearTasksFromLocalStorage();
+}
+
+// Clear Tasks from LS
+function clearTasksFromLocalStorage() {
+  localStorage.clear();
+}
+
+// Filter Tasks
+function filterTasks(e) {
+  const text = e.target.value.toLowerCase();
+
+  document.querySelectorAll('.collection-item').forEach(function(task){
+    const item = task.firstChild.textContent;
+    if(item.toLowerCase().indexOf(text) != -1){
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  });
 }
